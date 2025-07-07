@@ -100,6 +100,9 @@ EMSCRIPTEN_KEEPALIVE
                 elif arg == 'string':
                     arguments.append('const char* arg_{}'.format(i))
                     push_arguments.append('  lua_pushstring(wasm_lua_state, arg_{});'.format(i))
+                elif arg == 'bool':
+                    arguments.append('BOOL arg_{}'.format(i))
+                    push_arguments.append('  lua_pushstring(wasm_lua_state, arg_{});'.format(i))
 
             failed_return_value = ''
             capture_return_value = ''
