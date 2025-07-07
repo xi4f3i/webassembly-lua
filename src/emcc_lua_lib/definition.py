@@ -120,6 +120,14 @@ EMSCRIPTEN_KEEPALIVE
   }
   return "";'''
                 return_type = 'const char* '
+            elif return_type == 'bool':
+                failed_return_value = 'return FALSE;'
+                capture_return_value = '''  if (lua_isboolean(wasm_lua_state, -1)) {
+    BOOL return_value = lua_toboolean(wasm_lua_state, -1);
+    lua_settop(wasm_lua_state, 0);
+    return return_value;
+  }
+  return FALSE;'''
 
             function = template.format(
                     return_type,
